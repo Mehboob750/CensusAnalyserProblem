@@ -39,4 +39,5 @@ public class CensusAnalyserTest {
             Assert.assertEquals(37, numOfStateCode);
         } catch (CensusAnalyserException e) { }
     }
+
 }
