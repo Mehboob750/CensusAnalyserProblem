@@ -35,7 +35,7 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),e.type.name());
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.DELIMETER_INCORRECT_EXCEPTION);
+                    CensusAnalyserException.ExceptionType.INCORRECT_INPUT_EXCEPTION);
         }
     }
 
@@ -51,7 +51,7 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),e.type.name());
         } catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.DELIMETER_INCORRECT_EXCEPTION);
+                    CensusAnalyserException.ExceptionType.INCORRECT_INPUT_EXCEPTION);
         }
     }
 
