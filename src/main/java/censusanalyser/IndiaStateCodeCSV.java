@@ -5,14 +5,14 @@ import com.opencsv.bean.CsvBindByName;
 public class IndiaStateCodeCSV {
     @CsvBindByName(column = "State Name", required = true)
     public String stateName;
-    @CsvBindByName(column = "StateCode", required = true)
-    public String StateCode;
+    @CsvBindByName(column = "State Code", required = true)
+    public String stateCode;
 
     @Override
     public String toString() {
         return "IndiaStateCodeCSV{" +
-                "state='" + stateName + '\'' +
-                ", StateCode='" + StateCode + '\'' +
+                "stateName='" + stateName + '\'' +
+                ", stateCode='" + stateCode + '\'' +
                 '}';
     }
 }
