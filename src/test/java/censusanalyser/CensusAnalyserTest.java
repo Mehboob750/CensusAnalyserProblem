@@ -10,7 +10,7 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String INCORRECT_FILE_TYPE_PATH ="./src/test/resources/IndiaStateCensusData.txt";
-    private static final String INDIA_STATE_CSV_FILE_PATH = "./src/main/resources/IndiaStateCode.csv";
+    private static final String INDIA_STATE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
     private static final String STATE_DATA_INCORRECT_FILE_TYPE_PATH ="./src/main/resources/IndiaStateCode.MP4";
 
     @Test
@@ -47,6 +47,16 @@ public class CensusAnalyserTest {
     }
 
     @Test
+    public void givenIndiaCensusData_WithIncorrectDelimeter_ShouldThrowException() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_INCORRECT_EXCEPTION,e.type);
+        }
+    }
+
+    @Test
     public void givenIndianStateCSV_shouldReturnExactCount() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
@@ -76,6 +86,16 @@ public class CensusAnalyserTest {
             censusAnalyser.loadIndiaCensusData(STATE_DATA_INCORRECT_FILE_TYPE_PATH);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+        }
+    }
+
+    @Test
+    public void givenIndiaStateData_WithIncorrectDelimeter_ShouldThrowException() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_STATE_CSV_FILE_PATH);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.DELIMETER_INCORRECT_EXCEPTION,e.type);
         }
     }
 
