@@ -130,4 +130,14 @@ public class CensusAnalyserTest {
         } catch (CensusAnalyserException e) { }
     }
 
+    @Test
+    public void givenIndianCensusData_WhenSortedOnPopulation_ShouldReturnSortedResult() throws CensusAnalyserException {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            String sortedCensusData = censusAnalyser.getPopulationWiseSortedCensusData();
+            IndiaCensusCSV[] censusCSV = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+            Assert.assertEquals(199812341, censusCSV[censusCSV.length-1].population);
+        } catch (CensusAnalyserException e) { }
+    }
 }
