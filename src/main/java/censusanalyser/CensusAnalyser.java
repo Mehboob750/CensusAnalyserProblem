@@ -91,6 +91,16 @@ public class CensusAnalyser {
         return sortedPopulationDensityCensusJson;
     }
 
+    public String getAreaWiseSortedCensusData() throws CensusAnalyserException {
+        if (censusList==null||censusList.size()==0) {
+            throw new CensusAnalyserException("No Census Data",CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
+        }
+        Comparator<IndiaCensusDAO>censusComparator=Comparator.comparing(census->census.areaInSqKm);
+        CensusAnalyser.sort(censusComparator);
+        String sortedAreaCensusJson=new Gson().toJson(this.censusList);
+        return sortedAreaCensusJson;
+    }
+
     private static void sort(Comparator<IndiaCensusDAO> censusComparator) {
         for(int i=0;i<censusList.size()-1;i++){
             for(int j=0;j<censusList.size()-i-1;j++){
