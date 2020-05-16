@@ -1,11 +1,6 @@
 package censusanalyser;
 
 import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.StreamSupport;
 
@@ -21,29 +16,13 @@ public class CensusAnalyser {
         this.usCensusCSVMap=new HashMap<>();
     }
 
-    public int loadIndiaCensusData(String csvFilePath) throws  CensusAnalyserException {
-        csvFileMap = new CensusLoader().loadCensusData(csvFilePath, IndiaCensusCSV.class);
+    public int loadIndiaCensusData(String... csvFilePath) throws  CensusAnalyserException {
+        csvFileMap = new CensusLoader().loadCensusData(IndiaCensusCSV.class,csvFilePath);
         return csvFileMap.size();
     }
 
-    public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException {
-        try (Reader reader = newBufferedReader(Paths.get(csvFilePath));){
-            ICSVBuilder csvBuilder=CSVBuilderFactory.createCSVBuilder();
-            Iterator<IndiaStateCodeCSV> stateCSVIterator = csvBuilder.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
-            return getCount(stateCSVIterator);
-        } catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        } catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(),e.type.name());
-        } catch (RuntimeException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.INCORRECT_INPUT_EXCEPTION);
-        }
-    }
-
     public int loadUSCensusData(String usCensusCsvFilePath) throws CensusAnalyserException {
-        csvFileMap = new CensusLoader().loadCensusData(usCensusCsvFilePath, USCensusCSV.class);
+        csvFileMap = new CensusLoader().loadCensusData(USCensusCSV.class,usCensusCsvFilePath);
         return csvFileMap.size();
     }
 
