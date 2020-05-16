@@ -36,6 +36,4 @@ public class IndiaCensusAdapter extends CensusAdapter {
                     CensusAnalyserException.ExceptionType.INCORRECT_INPUT_EXCEPTION);
         }
     }
-
-
 }
