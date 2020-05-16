@@ -10,19 +10,17 @@ public class CensusAnalyser {
     static List<CensusDAO> censusList=null;
     Map<String, CensusDAO> csvFileMap = null;
     Map <String, USCensusCSV> usCensusCSVMap = null;
+
     public CensusAnalyser() {
         this.censusList = new ArrayList<CensusDAO>();
         this.csvFileMap =new HashMap<String, CensusDAO>();
         this.usCensusCSVMap=new HashMap<>();
     }
 
-    public int loadIndiaCensusData(String... csvFilePath) throws  CensusAnalyserException {
-        csvFileMap = new CensusLoader().loadCensusData(IndiaCensusCSV.class,csvFilePath);
-        return csvFileMap.size();
-    }
+    public enum Country{INDIA,US}
 
-    public int loadUSCensusData(String usCensusCsvFilePath) throws CensusAnalyserException {
-        csvFileMap = new CensusLoader().loadCensusData(USCensusCSV.class,usCensusCsvFilePath);
+    public int loadCensusData(Country country,String... csvFilePath) throws  CensusAnalyserException {
+        csvFileMap = new CensusLoader().loadCensusData(country,csvFilePath);
         return csvFileMap.size();
     }
 

@@ -10,7 +10,16 @@ import java.util.stream.StreamSupport;
 import static java.nio.file.Files.newBufferedReader;
 
 public class CensusLoader {
-    public <E> Map<String, CensusDAO> loadCensusData(Class<E> censusCsvClass,String... csvFilePath) throws CensusAnalyserException {
+
+    public Map<String, CensusDAO> loadCensusData(CensusAnalyser.Country country,String... csvFilePath) throws CensusAnalyserException {
+        if(country.equals(CensusAnalyser.Country.INDIA))
+            return this.loadCensusData(IndiaCensusCSV.class,csvFilePath);
+        else if (country.equals(CensusAnalyser.Country.US))
+            return this.loadCensusData(USCensusCSV.class,csvFilePath);
+        else throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.INVALID_COUNTRY,"Invalid Country");
+    }
+
+    private <E> Map<String, CensusDAO> loadCensusData(Class<E> censusCsvClass, String... csvFilePath) throws CensusAnalyserException {
         try(Reader reader = newBufferedReader(Paths.get(csvFilePath[0]));) {
             Map<String,CensusDAO> csvFileMap = new HashMap<>();
             ICSVBuilder csvBuilder=CSVBuilderFactory.createCSVBuilder();
