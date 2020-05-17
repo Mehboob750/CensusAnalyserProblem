@@ -41,7 +41,7 @@ public class CensusAnalyser {
     }
 
     public String getPopulationDensityWiseSortedCensusData() throws CensusAnalyserException {
-        Comparator<CensusDAO> censusComparator = Comparator.comparing(census -> census.densityPerSqKm);
+        Comparator<CensusDAO> censusComparator = Comparator.comparing(census -> census.populationDensity);
         return getSortedCensusData(censusComparator);
     }
 
